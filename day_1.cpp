@@ -44,6 +44,7 @@ int main()
         float zero = 0.0;
         new_mass = max(floor(new_mass / 3) - 2, zero);
         sum += new_mass;
+        cout << "finished";
       }
     }
     myfile.close();

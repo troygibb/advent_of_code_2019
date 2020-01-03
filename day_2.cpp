@@ -89,37 +89,67 @@ vector<int> get_input()
   {
     while (getline(fileInput, line, ','))
     {
-      arr.push_back(stoi(line));
+      int num = stoi(line);
+      arr.push_back(num);
     }
   }
+
   return arr;
 }
 
-int main()
+int get_output(int noun, int verb, vector<int> prg_input)
 {
-  vector<int> prg_input = get_input();
-
-  for (int i = 0; i < prg_input.size(); i += 4)
+  prg_input[1] = noun;
+  prg_input[2] = verb;
+  int vec_size = prg_input.size();
+  for (int i = 0; i < vec_size; i += 4)
   {
     int op = prg_input[i];
     if (op == FINISHED)
     {
       break;
     }
-    int first_pos = prg_input[prg_input[i + 1]];
-    int second_pos = prg_input[prg_input[i + 1]];
+    int first_num = prg_input[prg_input[i + 1]];
+    int second_num = prg_input[prg_input[i + 2]];
     int result;
     if (op == ADD)
     {
-      result = first_pos + second_pos;
+      result = first_num + second_num;
     }
     else
     {
-      result = first_pos * second_pos;
+      result = first_num * second_num;
     }
-    prg_input[i + 3] = result;
+    prg_input[prg_input[i + 3]] = result;
+  }
+  int final_answer = prg_input[0];
+  return final_answer;
+}
+
+int main()
+{
+  vector<int> prg_input = get_input();
+  int answer = -1;
+
+  for (int noun = 0; noun < 100; noun += 1)
+  {
+    for (int verb = 0; verb < 100; verb += 1)
+    {
+      vector<int> input_copy(prg_input);
+      int current_answer = get_output(noun, verb, input_copy);
+      if (current_answer == 19690720)
+      {
+        answer = 100 * noun + verb;
+        break;
+      }
+    }
   }
 
-  cout << "Final answer: " << prg_input[0];
+  if (answer == -1)
+  {
+    throw "Not found";
+  }
+
+  cout << "Final answer: " << answer;
   return 0;
 }

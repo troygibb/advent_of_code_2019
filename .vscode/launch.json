@@ -5,18 +5,15 @@
       "name": "(lldb) Launch",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/a.out",
+      "program": "${workspaceFolder}/${fileBasenameNoExtension}.out",
       "args": [],
-      "stopAtEntry": true,
+      "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
       "externalConsole": true,
       "MIMode": "lldb",
-      "logging": {
-        "trace": true,
-        "traceResponse": true,
-        "engineLogging": true
-      }
+      "preLaunchTask": "Build with Clang",
+      "logging": {}
     }
   ]
 }

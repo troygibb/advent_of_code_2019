@@ -2,6 +2,15 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Remove compiled output",
+      "command": "rm",
+      "args": ["-f", "${fileBasenameNoExtension}.out"],
+      "presentation": {
+        "reveal": "silent",
+        "clear": true
+      }
+    },
+    {
       "label": "Build with Clang",
       "type": "shell",
       "command": "clang++",
@@ -10,12 +19,18 @@
         "-stdlib=libc++",
         "${file}",
         "-o",
-        "a.out",
+        "${fileBasenameNoExtension}.out",
         "--debug"
       ],
       "group": {
         "kind": "build",
         "isDefault": true
+      },
+      "dependsOrder": "sequence",
+      "dependsOn": ["Remove compiled output"],
+      "presentation": {
+        "reveal": "silent",
+        "clear": true
       }
     }
   ]
